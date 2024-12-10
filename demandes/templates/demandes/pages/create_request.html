@@ -1,0 +1,277 @@
+<!-- Bootstrap et icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<div class="container mt-5 p-4 rounded-3 bg-white shadow-lg" style="max-width: 800px;">
+    <h2 class="text-center text-primary mb-4">Demande de Document</h2>
+    <form id="requestForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Rubrique Informations Employé -->
+        <div class="mb-4">
+            <h4 class="text-muted">Informations Employé</h4>
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" id="nom" name="nom" class="form-control" placeholder="Entrez votre nom" required>
+            </div>
+            <div class="mb-3">
+                <label for="prenoms" class="form-label">Prénoms</label>
+                <input type="text" id="prenoms" name="prenoms" class="form-control" placeholder="Entrez vos prénoms" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Adresse Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Entrez votre email" required>
+            </div>
+            <div class="mb-3">
+                <label for="poste" class="form-label">Poste</label>
+                <input type="text" id="poste" name="poste" class="form-control" placeholder="Entrez votre poste" required>
+            </div>
+        </div>
+
+        <!-- Rubrique Département -->
+        <div class="mb-4">
+            <h4 class="text-muted">Département</h4>
+            <select id="departement" name="departement" class="form-select" required>
+                <option value="" disabled selected>Choisissez votre département</option>
+                <option value="Direction Réseau">Direction Réseau</option>
+                <option value="Direction Financière">Direction Financière</option>
+                <option value="Direction commerciale">Direction Commerciale</option>
+                <option value="Direction HSEQ">Direction HSEQ</option>
+                <option value="Direction des Ressources Humaines et Juridique">Direction des Ressources Humaines et Juridique</option>
+            </select>
+        </div>
+
+        <!-- Rubrique Type de Document -->
+        <div class="mb-4">
+            <h4 class="text-muted">Type de Document</h4>
+            <select id="documentType" name="document_type" class="form-select" required>
+                <option value="" disabled selected>Choisissez un document</option>
+                <option value="Attestation de Travail">Attestation de Travail</option>
+                <option value="Attestation de Congés">Attestation de Congés</option>
+                <option value="Ordre de Mission">Ordre de Mission</option>
+                <option value="Accord Tripartite">Accord Tripartite</option>
+            </select>
+        </div>
+
+        <!-- Champs dynamiques -->
+        <div id="motifField" class="mb-3" style="display: none;">
+            <label for="motif" class="form-label">Motif</label>
+            <textarea id="motif" name="motif" class="form-control" placeholder="Indiquez le motif"></textarea>
+        </div>
+
+        <div id="congeFields" style="display: none;">
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Date de début des congés</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">Date de fin des congés</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="resume_date" class="form-label">Date de reprise</label>
+                <input type="date" id="resume_date" name="resume_date" class="form-control" disabled>
+            </div>
+        </div>
+
+        <div id="missionFields" style="display: none;">
+            <div class="mb-3">
+                <label for="mission_location" class="form-label">Lieu de la mission</label>
+                <input type="text" id="mission_location" name="mission_location" class="form-control" placeholder="Lieu de la mission">
+            </div>
+            <div class="mb-3">
+                <label for="mission_object" class="form-label">Objet de la mission</label>
+                <textarea id="mission_object" name="mission_object" class="form-control" placeholder="Objet de la mission"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="invitation_letter" class="form-label">Lettre d'invitation</label>
+                <input type="file" id="invitation_letter" name="invitation_letter" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="ticket_copy" class="form-label">Copie du billet</label>
+                <input type="file" id="ticket_copy" name="ticket_copy" class="form-control">
+            </div>
+        </div>
+
+        <div id="accordFields" style="display: none;">
+            <div class="mb-3">
+                <label for="bank_choice" class="form-label">Choix de la banque</label>
+                <select id="bank_choice" name="bank_choice" class="form-select">
+                    <option value="" disabled selected>Choisissez une banque</option>
+                    <option value="Banque Atlantique">Banque Atlantique</option>
+                    <option value="BIA-TOGO">BIA-TOGO</option>
+                    <option value="Ecobank">Ecobank</option>
+                    <option value="Orabank">Orabank</option>
+                    <option value="Autre">Autre (Précisez)</option>
+                    
+                </select>
+            </div>
+            <div id="otherBankField" class="mb-3" style="display: none;">
+                <label for="other_bank" class="form-label">Précisez la banque</label>
+                <input type="text" id="other_bank" name="other_bank" class="form-control" placeholder="Nom de la banque">
+            </div>
+            <div class="mb-3">
+                <label for="amortization_table" class="form-label">Tableau d'amortissement</label>
+                <input type="file" id="amortization_table" name="amortization_table" class="form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="history.back();">Fermer</button>
+            <button type="submit" class="btn btn-success">Valider</button>
+        </div>
+        {% comment %} <!-- Bouton de soumission -->
+        <button type="submit" class="btn btn-primary w-100">Soumettre <i class="fas fa-paper-plane"></i></button> {% endcomment %}
+    </form>
+</div>
+
+<!-- JavaScript corrigé -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const documentType = document.getElementById('documentType');
+        const motifField = document.getElementById('motifField');
+        const congeFields = document.getElementById('congeFields');
+        const missionFields = document.getElementById('missionFields');
+        const accordFields = document.getElementById('accordFields');
+        const bankChoice = document.getElementById('bank_choice');
+        const otherBankField = document.getElementById('otherBankField');
+    
+        // Fonction pour masquer tous les champs
+        function hideAllFields() {
+            motifField.style.display = 'none';
+            congeFields.style.display = 'none';
+            missionFields.style.display = 'none';
+            accordFields.style.display = 'none';
+            otherBankField.style.display = 'none';
+            document.querySelectorAll('#congeFields input').forEach(input => input.disabled = true);
+        }
+    
+        // Afficher les champs en fonction du type de document sélectionné
+        documentType.addEventListener('change', function () {
+            hideAllFields();
+            const selectedType = documentType.value;
+    
+            if (selectedType === 'Attestation de Travail') {
+                motifField.style.display = 'block';
+            } else if (selectedType === 'Attestation de Congés') {
+                congeFields.style.display = 'block';
+                document.querySelectorAll('#congeFields input').forEach(input => input.disabled = false);
+            } else if (selectedType === 'Ordre de Mission') {
+                missionFields.style.display = 'block';
+            } else if (selectedType === 'Accord Tripartite') {
+                accordFields.style.display = 'block';
+            }
+        });
+    
+        // Afficher le champ "Autre Banque" lorsque l'option "Autre" est sélectionnée
+        bankChoice.addEventListener('change', function () {
+            if (bankChoice.value === 'Autre') {
+                otherBankField.style.display = 'block';
+            } else {
+                otherBankField.style.display = 'none';
+            }
+        });
+    });
+    
+</script>
+
+
+{% comment %} <!-- create_request.html -->
+<form id="requestForm" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <h3>Informations Employé</h3>
+    <input type="text" name="nom" placeholder="Nom" class="form-control" required>
+    <input type="text" name="prenoms" placeholder="Prénoms" class="form-control" required>
+    <input type="email" name="email" placeholder="Adresse Email" class="form-control" required>
+
+    <h3>Demande de Document</h3>
+    <select id="documentType" name="document_type" class="form-control" required>
+        <option value="">-- Choisissez un document --</option>
+        <option value="Attestation de Travail">Attestation de Travail</option>
+        <option value="Attestation de Congés">Attestation de Congés</option>
+        <option value="Ordre de Mission">Ordre de Mission</option>
+        <option value="Accord Tripartite">Accord Tripartite</option>
+    </select>
+
+    <!-- Champs spécifiques pour chaque type de document -->
+    <div id="motifField" class="form-group" style="display: none;">
+        <textarea name="motif" placeholder="Motif" class="form-control"></textarea>
+    </div>
+    <div id="congeFields" class="form-group" style="display: none;">
+        <input type="date" id="start_date" name="start_date" placeholder="Date de début des congés" class="form-control" disabled>
+        <input type="date" id="end_date" name="end_date" placeholder="Date de fin des congés" class="form-control" disabled>
+        <input type="date" id="resume_date" name="resume_date" placeholder="Date de reprise" class="form-control" disabled>
+    </div>
+
+    <div id="missionFields" class="form-group" style="display: none;">
+        <input type="text" name="mission_location" placeholder="Lieu de la mission" class="form-control">
+        <textarea name="mission_object" placeholder="Objet de la mission" class="form-control"></textarea>
+        <input type="file" name="invitation_letter" class="form-control">
+        <input type="file" name="ticket_copy" class="form-control">
+    </div>
+
+    <div id="accordFields" class="form-group" style="display: none;">
+        <select name="bank_choice" class="form-control">
+            <option value="">-- Choisissez une banque --</option>
+            <option value="Banque Atlantique">Banque Atlantique</option>
+            <option value="BIA-TOGO">BIA-TOGO</option>
+            <option value="Ecobank">Ecobank</option>
+            <option value="Orabank">Orabank</option>
+            <option value="Autre">Autre (Précisez)</option>
+        </select>
+        <input type="file" name="amortization_table" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const documentType = document.getElementById('documentType');
+    const motifField = document.getElementById('motifField');
+    const congeFields = document.getElementById('congeFields');
+    const missionFields = document.getElementById('missionFields');
+    const accordFields = document.getElementById('accordFields');
+
+    // Fonction pour masquer tous les champs
+    function hideAllFields() {
+        motifField.style.display = 'none';
+        congeFields.style.display = 'none';
+        missionFields.style.display = 'none';
+        accordFields.style.display = 'none';
+    }
+
+
+    // Afficher les champs en fonction du type de document sélectionné
+    documentType.addEventListener('change', function () {
+        hideAllFields();
+        const selectedType = documentType.value;
+
+        if (selectedType === 'Attestation de Travail') {
+            motifField.style.display = 'block';
+        } else if (selectedType === 'Attestation de Congés') {
+            congeFields.style.display = 'block';
+        } else if (selectedType === 'Ordre de Mission') {
+            missionFields.style.display = 'block';
+        } else if (selectedType === 'Accord Tripartite') {
+            accordFields.style.display = 'block';
+        }
+    });
+});
+document.getElementById("document_type").addEventListener("change", function () {
+    const congeFields = document.getElementById("congeFields");
+    const documentType = this.value;
+
+    if (documentType === "Attestation de Congés") {
+        congeFields.style.display = "block";
+        congeFields.querySelectorAll("input").forEach((input) => {
+            input.disabled = false;
+        });
+    } else {
+        congeFields.style.display = "none";
+        congeFields.querySelectorAll("input").forEach((input) => {
+            input.disabled = true;
+        });
+    }
+});
+</script> {% endcomment %}

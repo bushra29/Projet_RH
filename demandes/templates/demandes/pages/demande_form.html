@@ -1,0 +1,41 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>
+
+{% comment %} <div class="container">
+    <h2>Ajouter un nouveau contrat de maintenance</h2>
+    {% include "demandes/forms/add.html" with form=form %}
+</div> {% endcomment %}
+
+{% comment %} <div class="container mt-4">
+    <h2>Demander {{ document.nom }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Informations Collaborateur</legend>
+            <label for="nom">Nom:</label>
+            <input type="text" name="nom" id="nom" required><br>
+
+            <label for="prenoms">Prénoms:</label>
+            <input type="text" name="prenoms" id="prenoms" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br>
+
+            <label for="poste">Poste:</label>
+            <input type="text" name="poste" id="poste" required><br>
+
+            <label for="departement">Département:</label>
+            <input type="text" name="departement" id="departement" required><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Informations du Document</legend>
+            {{ form.as_p }}
+        </fieldset>
+
+        <button type="submit" class="btn btn-success">Valider</button>
+    </form>
+</div> {% endcomment %}

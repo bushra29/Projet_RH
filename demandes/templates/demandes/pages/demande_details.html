@@ -1,0 +1,51 @@
+{% extends 'demandes/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Détails de la Demande</h2>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Référence :</strong> {{ demande.reference }}</p>
+            <p><strong>Nom :</strong> {{ demande.nom }}</p>
+            <p><strong>Prénoms :</strong> {{ demande.prenoms }}</p>
+            <p><strong>email :</strong> {{ demande.email }}</p>
+            <p><strong>Poste:</strong> {{ demande.poste }}</p>
+            <p><strong>Département :</strong> {{ demande.departement }}</p>
+            <p><strong>Type de Document :</strong> {{ demande.document_type }}</p>
+            <p><strong>Date de Création :</strong> {{ demande.created_at }}</p>
+
+            {% if demande.motif %}
+                <p><strong>Motif :</strong> {{ demande.motif }}</p>
+            {% endif %}
+            {% if demande.start_date %}
+                <p><strong>Date de Début :</strong> {{ demande.start_date }}</p>
+            {% endif %}
+            {% if demande.end_date %}
+                <p><strong>Date de Fin :</strong> {{ demande.end_date }}</p>
+            {% endif %}
+            {% if demande.resume_date %}
+                <p><strong>Date de Reprise :</strong> {{ demande.resume_date }}</p>
+            {% endif %}
+            {% if demande.mission_location %}
+                <p><strong>Lieu de Mission :</strong> {{ demande.mission_location }}</p>
+            {% endif %}
+            {% if demande.mission_object %}
+                <p><strong>Objet de Mission :</strong> {{ demande.mission_object }}</p>
+            {% endif %}
+            {% if demande.invitation_letter %}
+                <p><strong>Lettre d'Invitation :</strong> <a href="{{ demande.invitation_letter.url }}" target="_blank">Voir le fichier</a></p>
+            {% endif %}
+            {% if demande.ticket_copy %}
+                <p><strong>Copie du Billet :</strong> <a href="{{ demande.ticket_copy.url }}" target="_blank">Voir le fichier</a></p>
+            {% endif %}
+            {% if demande.bank_choice %}
+                <p><strong>Banque :</strong> {{ demande.bank_choice }}</p>
+            {% endif %}
+            {% if demande.amortization_table %}
+                <p><strong>Tableau d'Amortissement :</strong> <a href="{{ demande.amortization_table.url }}" target="_blank">Voir le fichier</a></p>
+            {% endif %}
+        </div>
+    </div>
+    <a href="{% url 'demandes:home' %}" class="btn btn-secondary mt-3">Retour à la Liste</a>
+    <a href="{% url 'demandes:update_request' demande.id %}" class="btn btn-secondary mt-3">Modifier</a>
+</div>
+{% endblock %}

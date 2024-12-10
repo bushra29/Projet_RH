@@ -1,0 +1,327 @@
+{% load static %}
+{% comment %} {% load filter %} {% endcomment %}
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!------------>
+<!-- Ajouter les fichiers CSS manquants -->
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'vendors/images/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'vendors/images/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'vendors/images/favicon-16x16.png' %}">
+
+<!-- CSS pour les DataTables -->
+<link rel="stylesheet" type="text/css" href="{% static 'src/plugins/datatables/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'src/plugins/datatables/css/responsive.bootstrap4.min.css' %}">
+
+<!-- Scripts Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-119386393-1');
+</script>
+
+<!------------>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>ToatalEnergies - Bootstrap Admin Dashboard HTML Template</title>
+
+<!---->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<!---->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'vendors/images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'vendors/images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'vendors/images/favicon-16x16.png' %}">
+
+    <!-- CSS -->
+
+  
+    <!-- JavaScript de l'application -->
+    <script src="{% static 'vendors/scripts/core.js' %}"></script>
+    <script src="{% static 'vendors/scripts/script.min.js' %}"></script>
+
+
+<!-- Bootstrap JS (nécessaire pour les dropdowns) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Select2 CSS -->
+    <link href="{% static 'django_select2/django_select2.css' %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="{% static 'django_select2/django_select2.css' %}">
+    <link rel="stylesheet" href="{% static 'src/plugins/select2/css/select2.min.css' %}"> <!-- Assuming this is locally hosted -->
+
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/icon-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'src/plugins/datatables/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'src/plugins/datatables/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}">
+  
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script async src="{% static 'js/gtag.js' %}"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+
+</head>
+
+<body>
+
+   
+<!-- Barre de navigation -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">TotalEnergies - RH</a>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'demandes:home' %}"><i class="fas fa-home"></i> Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'demandes:demandes_list' %}"><i class="fas fa-file-alt"></i> Demandes</a>
+            </li>
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="{% url 'demandes:create_request' %}"><i class="fas fa-plus-circle"></i> Nouvelle Demande</a>
+            </li> {% endcomment %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'demandes:rh_access' %}"><i class="fas fa-user-shield"></i> Accès RH</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    <div class="mobile-menu-overlay"></div>
+
+ 
+    <style>
+        .navbar-custom {
+            background-color: #003366; /* Bleu foncé élégant */
+            color: #ffffff; /* Texte blanc pour la lisibilité */
+        }
+    
+        .navbar-brand,
+        .nav-link {
+            color: #ffffff !important;
+        }
+    
+        .nav-link.active {
+            background-color: #00509E; /* Bleu moyen pour l'onglet actif */
+            color: #ffffff !important;
+        }
+    
+        .navbar-toggler-icon {
+            background-color: #ffffff; /* Icône de toggle blanc pour meilleure visibilité */
+        }
+    
+        .navbar-custom .nav-link:hover {
+            background-color: #004080; /* Survol des liens en bleu foncé */
+            color: #ffffff !important;
+        }
+    </style>
+    {% comment %} <style>
+        .submenu {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .submenu li {
+            margin: 0; 
+        }
+        
+        .submenu li a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .dropdown.active .submenu {
+            display: block;
+        }
+        .menu-block .sidebar-menu .submenu li a,
+        .menu-block .sidebar-menu li a 
+        {
+        font-size: 16px;
+        }
+        .user-icon {
+            width: 40px; /* Ajustez la taille selon vos besoins */
+            height: 40px; /* Assurez-vous que la hauteur et la largeur sont identiques pour un cercle parfait */
+            border-radius: 50%;
+            overflow: hidden; /* Cache les parties de l'image qui dépassent du cercle */
+            display: flex;
+            align-items: center; /* Centre verticalement */
+            justify-content: center; /* Centre horizontalement */
+            background-color: #f0f0f0; /* Optionnel : ajoute une couleur de fond */
+        }
+        
+        .user-icon img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Assure que l'image couvre tout le cercle sans se déformer */
+        }        
+    </style> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').on('click', function() {
+                // Toggle active class on dropdown to show/hide the submenu
+                $(this).parent('.dropdown').toggleClass('active');
+            });
+        });
+    </script>
+    <div class="main-container">
+        <div class="pd-ltr-20">
+            {% block content %}
+            {% endblock %} 
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'vendors/scripts/core.js'%}"></script>
+    <script src="{% static 'vendors/scripts/script.min.js'%}"></script>
+    <script src="{% static 'vendors/scripts/process.js'%}"></script>
+    <script src="{% static 'vendors/scripts/layout-settings.js'%}"></script>
+    <script src="{% static 'src/plugins/apexcharts/apexcharts.min.js'%}"></script>
+    <script src="{% static 'src/plugins/datatables/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'src/plugins/datatables/js/dataTables.bootstrap4.min.js'%}"></script>
+    <script src="{% static 'src/plugins/datatables/js/dataTables.responsive.min.js'%}"></script>
+    <script src="{% static 'src/plugins/datatables/js/responsive.bootstrap4.min.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.css" rel="stylesheet">
+    <script src="{% static 'vendors/scripts/dashboard.js'%}"></script>
+    <script src="{% static 'vendors/scripts/main1.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/i18n/jquery-ui-i18n.min.js"></script>
+
+    <style>
+        .footer-wrap {
+            font-size: 12px;  /* Ajustez la taille de police ici */
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+
+        $(document).ready(function(){
+           $("#search").on("keyup", function(){
+              var value = $(this).val().toLowerCase();
+              $("#myTable tr").filter(function(){
+                 $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value)>-1)
+              });
+           });
+        });
+     
+     </script>
+     <!---->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Si tu utilises Chart.js pour les graphiques -->
+ <!-- -->
+
+ <!---->
+
+
+     
+
+    {% comment %} <div class="footer-wrap pd-20 mb-20 card-box">
+        TotalEnergies 2024-InventaireApp <a href="https://github.com/dropways" target="_blank">By Service IT TotalEnergies</a>
+    </div> {% endcomment %}
+
+    
+</body>
+</html>
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application RH - Formulaire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .navbar-custom {
+            background-color: #673AB7; /* Couleur violette similaire à Google Forms */
+            color: #fff;
+        }
+        .nav-link {
+            color: #fff;
+        }
+        .nav-link.active {
+            background-color: #5E35B1;
+            color: #fff;
+        }
+        .container-custom {
+            max-width: 800px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barre de navigation avec onglets -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Mon Application RH</a>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'demandes:home' %}"><i class="fas fa-question-circle"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'demandes:rh_access' %}"><i class="fas fa-chart-bar"></i> Demande</a>
+            </li>
+            <li class="nav-item">
+                {% comment %} <a class="nav-link" href="{% url 'demandes:parametres' %}"><i class="fas fa-cog"></i> Accès RH</a> {% endcomment %}
+            {% comment %} </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container container-custom">
+    {% block content %}
+    <!-- Contenu dynamique des pages -->
+    {% endblock %}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> {% endcomment %} 
+
+

@@ -1,0 +1,14 @@
+{% extends 'demandes/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Supprimer la Demande</h2>
+    <div class="alert alert-warning">
+        <p>Êtes-vous sûr de vouloir supprimer la demande de <strong>{{ demande.nom }} {{ demande.prenoms }}</strong> pour le document <strong>{{ demande.document_type }}</strong> ?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirmer la Suppression</button>
+            <a href="{% url 'demandes:demandes_list' %}" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

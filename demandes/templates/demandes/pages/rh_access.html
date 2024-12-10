@@ -1,0 +1,14 @@
+{% extends 'demandes/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Accès au Service RH</h2>
+    <form method="post" action="{% url 'demandes:rh_access' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Entrez le mot de passe" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Accéder</button>
+    </form>
+</div>
+{% endblock %}

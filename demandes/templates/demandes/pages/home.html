@@ -1,0 +1,48 @@
+{% extends 'demandes/base.html' %}
+{% block content %}
+<div class="container text-center mt-12">
+    <h2>Bienvenue sur l'application de demande RH</h2>
+    <a href="{% url 'demandes:create_request' %}" class="btn btn-primary btn-lg mt-3">Faire une demande</a>
+    <a href="{% url 'demandes:mes_demandes' %}" class="btn btn-primary btn-lg mt-3">Mes demandes</a>
+    <a href="{% url 'demandes:dashboard' %}" class="btn btn-secondary btn-lg mt-3">Accès RH</a>
+</div>
+{% endblock %} 
+
+{% comment %} {% extends 'demandes/base.html' %}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="text-center">
+        <h1>Bienvenue sur l'application de demande RH</h1>
+        <div class="mt-4">
+            <a href="{% url 'demandes:create_request' %}" class="btn btn-primary btn-lg">Faire une demande</a>
+            <a href="{% url 'demandes:mes_demandes' %}" class="btn btn-primary btn-lg mt-3">Mes demandes</a>
+            <a href="{% url 'demandes:dashboard' %}" class="btn btn-secondary btn-lg mt-3">Accès RH</a>
+        </div>
+    </div>
+</div>
+<style>
+
+    h1 {
+        font-weight: bold;
+        color: #1a237e; /* Couleur élégante et professionnelle */
+    }
+    
+    .btn-primary {
+        background-color: #3f51b5; /* Couleur bleue élégante */
+        border: none;
+    }
+    
+    .btn-primary:hover {
+        background-color: #303f9f;
+    }
+    
+    .btn-secondary {
+        background-color: #757575;
+        border: none;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #616161;
+    }
+    
+</style> {% endcomment %}
